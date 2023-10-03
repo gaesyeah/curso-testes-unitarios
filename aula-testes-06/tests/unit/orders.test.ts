@@ -7,8 +7,8 @@ import { OrderInput } from "../../src/validator";
 describe("Order Service Tests", () => {
   it("should create an order", async () => {
     const orderData: OrderInput = {
-      client: 'gabriel',
-      description: 'teste'
+      client: faker.person.fullName(),
+      description: faker.commerce.product()
     };
     const order = await createOrder(orderData);
     expect(order).toEqual({
@@ -33,6 +33,10 @@ describe("Order Service Tests", () => {
   });
 
   it("should return status INVALID when protocol doesn't exists", async () => {
+    jest.spyOn(orderRepository, "getByProtocol").mockImplementationOnce((): any => {
+      return undefined
+    });
+
     const nonExistentProtocol = '99999999';
     const order = await getOrderByProtocol(nonExistentProtocol);
     expect(order).toEqual({ 
