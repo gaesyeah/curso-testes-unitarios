@@ -1,6 +1,5 @@
 import { faker } from "@faker-js/faker";
 import * as usersRepository from "../../src/users-repository";
-import * as infractionsRepository from "../../src/infractions-repository";
 import { getInfractionsFrom } from "infractions-service";
 import { User } from "@prisma/client";
 
